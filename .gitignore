@@ -29,3 +29,12 @@ coverage/
 
 # Bun
 bun.lockb
+bun.lock
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Vite config build artifacts
+vite.config.js
+vite.config.d.ts
+vite.config.d.ts.map
