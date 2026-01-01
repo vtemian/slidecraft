@@ -9,11 +9,11 @@
 }
 
 .star-rating__star--filled {
-  color: #ffd700;
+  color: var(--terminal-yellow);
 }
 
 .star-rating__star--empty {
-  color: #4a4a6a;
+  color: var(--border-subtle);
 }
 
 .star-rating--animated .star-rating__star--filled {

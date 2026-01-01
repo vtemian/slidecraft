@@ -18,8 +18,10 @@
 }
 
 .game__title {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   margin: 0;
 }
 
@@ -31,10 +33,12 @@
 
 .game__moves {
   font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
 }
 
 .game__optimal {
-  opacity: 0.6;
+  color: var(--foreground-subtle);
 }
 
 .game__board-container {
@@ -50,21 +54,24 @@
 
 .game__button {
   padding: 0.5rem 1rem;
-  background: #4a4a6a;
-  border: none;
-  border-radius: 4px;
-  color: white;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--foreground);
   cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.2s;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .game__button:hover:not(:disabled) {
-  background: #5a5a7a;
+  background: var(--foreground);
+  color: var(--background);
 }
 
 .game__button:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
@@ -80,21 +87,23 @@
 .game__direction-button {
   width: 3rem;
   height: 3rem;
-  background: #4a4a6a;
-  border: none;
-  border-radius: 4px;
-  color: white;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--foreground);
   cursor: pointer;
-  font-size: 1.5rem;
-  transition: background 0.2s, transform 0.1s;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 .game__direction-button:hover:not(:disabled) {
-  background: #5a5a7a;
+  background: var(--foreground);
+  color: var(--background);
 }
 
 .game__direction-button:active:not(:disabled) {
-  transform: scale(0.95);
+  background: var(--foreground);
+  color: var(--background);
 }
 
 .game__direction-button:disabled {
@@ -108,17 +117,20 @@
 .game__direction-button--right { grid-area: right; }
 
 .game__instructions {
-  font-size: 0.85rem;
-  opacity: 0.7;
+  font-size: 0.8rem;
+  color: var(--foreground-subtle);
   text-align: center;
   min-height: 1.5rem;
 }
 
 .game__selected-indicator {
   font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.game__selected-indicator--red { color: #ff4444; }
-.game__selected-indicator--blue { color: #4444ff; }
-.game__selected-indicator--green { color: #44ff44; }
-.game__selected-indicator--yellow { color: #ffff44; }
+.game__selected-indicator--red { color: var(--terminal-red); }
+.game__selected-indicator--blue { color: var(--accent-primary); }
+.game__selected-indicator--green { color: var(--terminal-green); }
+.game__selected-indicator--yellow { color: var(--terminal-yellow); }

@@ -18,7 +18,7 @@ interface CelebrationProps {
   onComplete?: () => void;
 }
 
-const COLORS = ['#ffd700', '#ff4444', '#4444ff', '#44ff44', '#ff44ff', '#44ffff'];
+const COLORS = ['#cc0000', '#00aa00', '#b8860b', '#0000ff', '#ff00ff', '#00aaaa'];
 const PARTICLE_COUNT = 50;
 
 export function Celebration({ active, onComplete }: CelebrationProps) {
