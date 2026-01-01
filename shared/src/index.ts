@@ -28,3 +28,7 @@ export type {
   TokenExchangeResponse,
   ApiError,
 } from './types/api.js';
+
+// Game logic
+export { calculateDestination } from './game/movement.js';
+export { checkWin, createGameState, applyMove, resetGameState } from './game/state.js';

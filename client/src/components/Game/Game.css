@@ -1,0 +1,124 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 100%;
+}
+
+.game__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.game__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.game__stats {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.game__moves {
+  font-size: 0.9rem;
+}
+
+.game__optimal {
+  opacity: 0.6;
+}
+
+.game__board-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.game__controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.game__button {
+  padding: 0.5rem 1rem;
+  background: #4a4a6a;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.game__button:hover:not(:disabled) {
+  background: #5a5a7a;
+}
+
+.game__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.game__direction-buttons {
+  display: grid;
+  grid-template-areas:
+    ". up ."
+    "left . right"
+    ". down .";
+  gap: 0.25rem;
+}
+
+.game__direction-button {
+  width: 3rem;
+  height: 3rem;
+  background: #4a4a6a;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.game__direction-button:hover:not(:disabled) {
+  background: #5a5a7a;
+}
+
+.game__direction-button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.game__direction-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.game__direction-button--up { grid-area: up; }
+.game__direction-button--down { grid-area: down; }
+.game__direction-button--left { grid-area: left; }
+.game__direction-button--right { grid-area: right; }
+
+.game__instructions {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  text-align: center;
+  min-height: 1.5rem;
+}
+
+.game__selected-indicator {
+  font-size: 0.75rem;
+}
+
+.game__selected-indicator--red { color: #ff4444; }
+.game__selected-indicator--blue { color: #4444ff; }
+.game__selected-indicator--green { color: #44ff44; }
+.game__selected-indicator--yellow { color: #ffff44; }

@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@discord/embedded-app-sdk": "^1.4.0",
     "@slidecraft/shared": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

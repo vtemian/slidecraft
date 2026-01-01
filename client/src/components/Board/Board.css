@@ -10,12 +10,29 @@
   aspect-ratio: 1;
   max-width: min(90vw, 90vh, 600px);
   max-height: min(90vw, 90vh, 600px);
+  width: 100%;
+  touch-action: none;
+  user-select: none;
+}
+
+@media (max-width: 480px) {
+  .board {
+    border-radius: 4px;
+    padding: 2px;
+    gap: 0;
+  }
 }
 
 .cell {
   background: #1a1a2e;
   border-radius: 2px;
   position: relative;
+}
+
+@media (max-width: 480px) {
+  .cell {
+    border-radius: 1px;
+  }
 }
 
 .cell--astronaut {
@@ -78,4 +95,16 @@
   bottom: 10%;
   width: 3px;
   background: linear-gradient(180deg, transparent, #00ffff, transparent);
+}
+
+@media (max-width: 480px) {
+  .force-field--up,
+  .force-field--down {
+    height: 2px;
+  }
+  
+  .force-field--left,
+  .force-field--right {
+    width: 2px;
+  }
 }
