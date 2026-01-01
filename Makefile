@@ -1,10 +1,10 @@
-.PHONY: install dev dev-client dev-server build test typecheck clean db-create db-migrate db-seed db-reset setup help
+.PHONY: install dev dev-client dev-server build test typecheck clean db-start db-stop db-migrate db-seed db-reset setup help
 
 # Default target
 help:
 	@echo "SlideCraft - Available commands:"
 	@echo ""
-	@echo "  make setup        - Full setup (install + db + seed)"
+	@echo "  make setup        - Full setup (install + db + migrate + seed)"
 	@echo "  make dev          - Start client and server"
 	@echo "  make dev-client   - Start client only"
 	@echo "  make dev-server   - Start server only"
@@ -14,16 +14,18 @@ help:
 	@echo "  make test         - Run all tests"
 	@echo "  make typecheck    - Run TypeScript checks"
 	@echo ""
-	@echo "  make db-create    - Create PostgreSQL database"
+	@echo "  make db-start     - Start PostgreSQL in Docker"
+	@echo "  make db-stop      - Stop PostgreSQL"
 	@echo "  make db-migrate   - Run database migrations"
 	@echo "  make db-seed      - Seed database with test puzzle"
-	@echo "  make db-reset     - Drop and recreate database"
+	@echo "  make db-reset     - Reset database (stop, remove, start, migrate, seed)"
 	@echo ""
 	@echo "  make env          - Copy .env.example files"
 	@echo "  make clean        - Remove build artifacts"
 
 # Full setup for new developers
-setup: install env db-create db-migrate db-seed
+setup: install env db-start db-wait db-migrate db-seed
+	@echo ""
 	@echo "Setup complete! Run 'make dev' to start."
 
 # Install dependencies
@@ -34,7 +36,7 @@ install:
 env:
 	@test -f server/.env || cp server/.env.example server/.env
 	@test -f client/.env || cp client/.env.example client/.env
-	@echo "Environment files ready (edit server/.env for database config)"
+	@echo "Environment files ready"
 
 # Development
 dev:
@@ -67,9 +69,20 @@ test-shared:
 typecheck:
 	bun run typecheck
 
-# Database commands
-db-create:
-	@createdb slidecraft 2>/dev/null || echo "Database 'slidecraft' already exists"
+# Docker/Database commands
+db-start:
+	docker compose up -d
+	@echo "PostgreSQL starting on localhost:5432"
+
+db-stop:
+	docker compose down
+
+db-wait:
+	@echo "Waiting for PostgreSQL to be ready..."
+	@until docker compose exec -T postgres pg_isready -U postgres > /dev/null 2>&1; do \
+		sleep 1; \
+	done
+	@echo "PostgreSQL is ready"
 
 db-migrate:
 	bun run --cwd server db:migrate
@@ -77,12 +90,19 @@ db-migrate:
 db-seed:
 	bun run --cwd server db:seed
 
-db-reset:
-	@dropdb slidecraft 2>/dev/null || true
-	@createdb slidecraft
+db-reset: db-stop
+	docker compose down -v
+	@$(MAKE) db-start
+	@$(MAKE) db-wait
 	@$(MAKE) db-migrate
 	@$(MAKE) db-seed
 	@echo "Database reset complete"
+
+db-logs:
+	docker compose logs -f postgres
+
+db-shell:
+	docker compose exec postgres psql -U postgres -d slidecraft
 
 # Clean build artifacts
 clean:
